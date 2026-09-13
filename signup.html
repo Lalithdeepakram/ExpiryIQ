@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Sign up · EcoShelf</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div id="navbar-root"></div>
+    <main class="auth-wrap">
+      <div class="auth-card">
+        <span class="tag-chip">New shelf tag</span>
+        <h1 class="display">Create your pantry</h1>
+        <p class="lede small">
+          Everything lives in your browser. No emails sent, no data uploaded.
+        </p>
+        <form id="signup-form" class="stack" novalidate>
+          <label>Name<input type="text" name="name" required autocomplete="name" /></label>
+          <label>Email<input type="email" name="email" required autocomplete="email" /></label>
+          <label
+            >Password<input
+              type="password"
+              name="password"
+              required
+              minlength="6"
+              autocomplete="new-password"
+          /></label>
+          <button class="btn btn-primary" type="submit">Create account</button>
+          <p id="signup-msg" class="form-msg" role="status" aria-live="polite"></p>
+          <p class="muted small">Already have one? <a href="login.html">Log in</a></p>
+        </form>
+      </div>
+    </main>
+    <script src="js/ai.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/navbar.js"></script>
+    <script>
+      document.getElementById("signup-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const f = e.target;
+        const msg = document.getElementById("signup-msg");
+        const res = EcoShelf.signup(f.name.value.trim(), f.email.value.trim(), f.password.value);
+        if (!res.ok) {
+          msg.textContent = res.error;
+          msg.className = "form-msg error";
+          return;
+        }
+        msg.textContent = "Account created — redirecting…";
+        msg.className = "form-msg success";
+        setTimeout(() => (location.href = "dashboard.html"), 600);
+      });
+    </script>
+  </body>
+</html>

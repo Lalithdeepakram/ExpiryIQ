@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>EcoShelf — Smart AI Food Inventory</title>
+    <meta
+      name="description"
+      content="EcoShelf helps reduce food waste with AI-powered expiry prediction, risk indicators, and donation recommendations."
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="page-landing">
+    <div id="navbar-root"></div>
+
+    <header class="hero">
+      <div class="hero-inner">
+        <span class="tag-chip">Est. 2026 · Anti-Waste Co-op</span>
+        <h1 class="display">Stop tossing food.<br />Start reading the shelf.</h1>
+        <p class="lede">
+          EcoShelf is a smart AI inventory system for homes, pantries and small shops. Track what
+          you have, predict when it'll spoil, and donate the surplus — before it becomes trash.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="signup.html">Get started free</a>
+          <a class="btn btn-ghost" href="login.html">I have an account</a>
+        </div>
+        <dl class="hero-stats">
+          <div>
+            <dt>1.3B</dt>
+            <dd>tons of food wasted / year globally</dd>
+          </div>
+          <div>
+            <dt>~30%</dt>
+            <dd>of household groceries thrown out</dd>
+          </div>
+          <div>
+            <dt>0</dt>
+            <dd>servers required — runs in your browser</dd>
+          </div>
+        </dl>
+      </div>
+      <div class="hero-tag" aria-hidden="true">
+        <div class="pricetag">
+          <span class="pricetag-hole"></span>
+          <div class="pricetag-body">
+            <span class="pricetag-label">FRESH</span>
+            <span class="pricetag-value">Milk · 2d left</span>
+            <span class="pricetag-meta">AI shelf-life 3d</span>
+          </div>
+        </div>
+        <div class="pricetag amber">
+          <span class="pricetag-hole"></span>
+          <div class="pricetag-body">
+            <span class="pricetag-label">USE SOON</span>
+            <span class="pricetag-value">Bread · 1d left</span>
+            <span class="pricetag-meta">Consider donating</span>
+          </div>
+        </div>
+        <div class="pricetag rust">
+          <span class="pricetag-hole"></span>
+          <div class="pricetag-body">
+            <span class="pricetag-label">CRITICAL</span>
+            <span class="pricetag-value">Spinach · 0d</span>
+            <span class="pricetag-meta">Donate today</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="section">
+      <h2 class="section-title">Everything the pantry needs</h2>
+      <p class="section-sub">
+        A rules-based AI you can actually read, wrapped in an interface that feels like a
+        farmers-market shelf tag.
+      </p>
+      <div class="feature-grid">
+        <article class="feature">
+          <h3>Local Auth</h3>
+          <p>
+            Sign up and log in — all stored safely in your browser via localStorage. No cloud, no
+            tracking.
+          </p>
+        </article>
+        <article class="feature">
+          <h3>Inventory Tracking</h3>
+          <p>
+            Add products with category, quantity, and date. Search, filter and sort a growing pantry
+            with ease.
+          </p>
+        </article>
+        <article class="feature">
+          <h3>AI Expiry Prediction</h3>
+          <p>
+            Transparent shelf-life rules per category compute predicted expiry the moment you save.
+          </p>
+        </article>
+        <article class="feature">
+          <h3>Risk Indicators</h3>
+          <p>
+            Safe · Warning · Critical · Expired — surfaced as die-cut price tags and a freshness
+            meter.
+          </p>
+        </article>
+        <article class="feature">
+          <h3>Live Dashboard</h3>
+          <p>
+            See totals, risk distribution and recent activity at a glance the moment you sign in.
+          </p>
+        </article>
+        <article class="feature">
+          <h3>Donation Suggestions</h3>
+          <p>Items about to spoil are flagged for donation with nearby center suggestions.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <h2 class="section-title">How data flows</h2>
+      <ol class="flow">
+        <li>
+          <span class="flow-num">1</span>
+          <h4>Add product</h4>
+          <p>You enter name, category, quantity and date added.</p>
+        </li>
+        <li>
+          <span class="flow-num">2</span>
+          <h4>AI analyze()</h4>
+          <p>Rules engine returns predicted expiry, days remaining and risk.</p>
+        </li>
+        <li>
+          <span class="flow-num">3</span>
+          <h4>Persist</h4>
+          <p>Everything is saved to localStorage under your account.</p>
+        </li>
+        <li>
+          <span class="flow-num">4</span>
+          <h4>Surface</h4>
+          <p>Dashboard, inventory and donation views react in real time.</p>
+        </li>
+        <li>
+          <span class="flow-num">5</span>
+          <h4>Act</h4>
+          <p>Use, donate or discard — activity feed keeps the record.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">The shelf-life rulebook</h2>
+      <p class="section-sub">
+        Fully transparent. Swap <code>analyze()</code> for a real ML model anytime.
+      </p>
+      <div class="table-wrap">
+        <table class="rules-table">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Shelf life</th>
+              <th>Warning at</th>
+              <th>Critical at</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Milk</td>
+              <td>3 days</td>
+              <td>≤ 2 days left</td>
+              <td>≤ 1 day left</td>
+            </tr>
+            <tr>
+              <td>Bread</td>
+              <td>5 days</td>
+              <td>≤ 3</td>
+              <td>≤ 1</td>
+            </tr>
+            <tr>
+              <td>Fruits</td>
+              <td>7 days</td>
+              <td>≤ 4</td>
+              <td>≤ 2</td>
+            </tr>
+            <tr>
+              <td>Vegetables</td>
+              <td>5 days</td>
+              <td>≤ 3</td>
+              <td>≤ 1</td>
+            </tr>
+            <tr>
+              <td>Meat</td>
+              <td>2 days</td>
+              <td>≤ 1</td>
+              <td>≤ 0</td>
+            </tr>
+            <tr>
+              <td>Eggs</td>
+              <td>21 days</td>
+              <td>≤ 7</td>
+              <td>≤ 2</td>
+            </tr>
+            <tr>
+              <td>Frozen Food</td>
+              <td>90 days</td>
+              <td>≤ 14</td>
+              <td>≤ 3</td>
+            </tr>
+            <tr>
+              <td>Beverages</td>
+              <td>30 days</td>
+              <td>≤ 7</td>
+              <td>≤ 2</td>
+            </tr>
+            <tr>
+              <td>Snacks</td>
+              <td>60 days</td>
+              <td>≤ 10</td>
+              <td>≤ 3</td>
+            </tr>
+            <tr>
+              <td>Canned Food</td>
+              <td>180 days</td>
+              <td>≤ 21</td>
+              <td>≤ 5</td>
+            </tr>
+            <tr>
+              <td>Other (default)</td>
+              <td>14 days</td>
+              <td>≤ 5</td>
+              <td>≤ 2</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div>
+        <strong class="brand">EcoShelf</strong>
+        <p>Built for a hackathon. Runs offline. Fights waste.</p>
+      </div>
+      <p class="muted">© 2026 EcoShelf Co-op · MIT License</p>
+    </footer>
+
+    <script src="js/ai.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/navbar.js"></script>
+  </body>
+</html>

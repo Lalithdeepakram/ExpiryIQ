@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Inventory · EcoShelf</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+  </head>
+  <body>
+    <div id="navbar-root"></div>
+    <main class="app-main">
+      <header class="app-header">
+        <div>
+          <span class="tag-chip">All items</span>
+          <h1 class="display">Your inventory</h1>
+        </div>
+        <a class="btn btn-primary" href="add-product.html">+ Add product</a>
+      </header>
+
+      <div class="toolbar">
+        <input id="search" type="search" placeholder="Search products…" />
+        <select id="filter-cat">
+          <option value="">All categories</option>
+        </select>
+        <select id="filter-risk">
+          <option value="">All risk levels</option>
+          <option value="Safe">Safe</option>
+          <option value="Warning">Warning</option>
+          <option value="Critical">Critical</option>
+          <option value="Expired">Expired</option>
+        </select>
+      </div>
+
+      <div class="table-wrap">
+        <table class="inventory-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Category</th>
+              <th>Qty</th>
+              <th>Added</th>
+              <th>Expires</th>
+              <th>Freshness</th>
+              <th>Risk</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="inv-body"></tbody>
+        </table>
+        <p id="empty" class="empty muted" hidden>No products match your filters.</p>
+      </div>
+    </main>
+    <script src="js/ai.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/inventory.js"></script>
+  </body>
+</html>

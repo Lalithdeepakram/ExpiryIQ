@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Add product · EcoShelf</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+  </head>
+  <body>
+    <div id="navbar-root"></div>
+    <main class="app-main add-wrap">
+      <div>
+        <span class="tag-chip">New arrival</span>
+        <h1 class="display">Tag a new product</h1>
+        <form id="add-form" class="stack card-form" novalidate>
+          <label>Name<input name="name" required /></label>
+          <label
+            >Category
+            <select name="category" id="category" required></select>
+          </label>
+          <div class="row">
+            <label
+              >Quantity<input type="number" name="quantity" min="1" step="1" value="1" required
+            /></label>
+            <label>Unit<input name="unit" value="pcs" required /></label>
+          </div>
+          <label>Date added<input type="date" name="dateAdded" required id="date-added" /></label>
+          <button class="btn btn-primary" type="submit">Save to shelf</button>
+          <p id="add-msg" class="form-msg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+      <aside class="preview-panel" id="preview-panel">
+        <span class="tag-chip">Live AI preview</span>
+        <h2 class="preview-name">—</h2>
+        <p class="preview-meta" id="preview-meta">Fill in the form to see the shelf tag.</p>
+        <div class="pricetag" id="preview-tag">
+          <span class="pricetag-hole"></span>
+          <div class="pricetag-body">
+            <span class="pricetag-label" id="pt-label">SAFE</span>
+            <span class="pricetag-value" id="pt-value">—</span>
+            <span class="pricetag-meta" id="pt-meta">—</span>
+          </div>
+        </div>
+        <div class="freshness">
+          <div class="freshness-bar"><span id="fresh-fill"></span></div>
+          <p class="muted small" id="fresh-text">Freshness</p>
+        </div>
+      </aside>
+    </main>
+    <script src="js/ai.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/navbar.js"></script>
+    <script>
+      EcoShelf.requireAuth();
+      const catSel = document.getElementById("category");
+      EcoShelf.AI.categories().forEach((c) => {
+        const o = document.createElement("option");
+        o.value = c;
+        o.textContent = c;
+        catSel.appendChild(o);
+      });
+      document.getElementById("date-added").value = new Date().toISOString().slice(0, 10);
+
+      const form = document.getElementById("add-form");
+      function preview() {
+        const d = Object.fromEntries(new FormData(form).entries());
+        if (!d.name || !d.category || !d.dateAdded) return;
+        const a = EcoShelf.AI.analyze({
+          name: d.name,
+          category: d.category,
+          dateAdded: d.dateAdded,
+        });
+        document.querySelector(".preview-name").textContent = d.name;
+        document.getElementById("preview-meta").textContent =
+          `${d.category} · shelf life ${a.shelfLife}d`;
+        const tag = document.getElementById("preview-tag");
+        tag.className = "pricetag " + a.tagClass;
+        document.getElementById("pt-label").textContent = a.risk.toUpperCase();
+        document.getElementById("pt-value").textContent = `${d.name} · ${a.daysRemaining}d left`;
+        document.getElementById("pt-meta").textContent =
+          `Expires ${EcoShelf.fmtDate(a.expiryDate)}`;
+        const pct = Math.max(0, Math.min(100, a.freshnessPct));
+        document.getElementById("fresh-fill").style.width = pct + "%";
+        document.getElementById("fresh-text").textContent = `Freshness ${pct}%`;
+      }
+      form.addEventListener("input", preview);
+      preview();
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const d = Object.fromEntries(new FormData(form).entries());
+        d.quantity = Number(d.quantity);
+        EcoShelf.addProduct(d);
+        EcoShelf.toast("Saved to shelf");
+        setTimeout(() => (location.href = "inventory.html"), 500);
+      });
+    </script>
+  </body>
+</html>

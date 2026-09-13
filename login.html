@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Log in · EcoShelf</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div id="navbar-root"></div>
+    <main class="auth-wrap">
+      <div class="auth-card">
+        <span class="tag-chip">Welcome back</span>
+        <h1 class="display">Open the pantry</h1>
+        <form id="login-form" class="stack" novalidate>
+          <label>Email<input type="email" name="email" required autocomplete="email" /></label>
+          <label
+            >Password<input
+              type="password"
+              name="password"
+              required
+              autocomplete="current-password"
+          /></label>
+          <button class="btn btn-primary" type="submit">Log in</button>
+          <p id="login-msg" class="form-msg" role="status" aria-live="polite"></p>
+          <p class="muted small">No account? <a href="signup.html">Sign up</a></p>
+        </form>
+      </div>
+    </main>
+    <script src="js/ai.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/navbar.js"></script>
+    <script>
+      document.getElementById("login-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const f = e.target;
+        const msg = document.getElementById("login-msg");
+        const res = EcoShelf.login(f.email.value.trim(), f.password.value);
+        if (!res.ok) {
+          msg.textContent = res.error;
+          msg.className = "form-msg error";
+          return;
+        }
+        msg.textContent = "Signed in — redirecting…";
+        msg.className = "form-msg success";
+        setTimeout(() => (location.href = "dashboard.html"), 400);
+      });
+    </script>
+  </body>
+</html>

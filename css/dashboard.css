@@ -1,0 +1,351 @@
+.app-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.app-header .display {
+  font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+  margin: 0.3rem 0 0.2rem;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.stat-card {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  position: relative;
+  overflow: hidden;
+}
+.stat-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 6px;
+  height: 100%;
+  background: var(--leaf);
+}
+.stat-card.warning::after {
+  background: var(--amber);
+}
+.stat-card.critical::after {
+  background: var(--rust);
+}
+.stat-card.expired::after {
+  background: var(--ink);
+}
+.stat-card.donation::after {
+  background: var(--leaf-glow);
+}
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.stat-value {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 2.2rem;
+  line-height: 1;
+  margin-top: 0.3rem;
+}
+.stat-hint {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  margin-top: 0.3rem;
+}
+
+.panel-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 800px) {
+  .panel-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.panel {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+.panel-title {
+  font-family: var(--font-display);
+  margin: 0 0 1rem;
+  font-size: 1.15rem;
+}
+.risk-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+.risk-bar {
+  display: grid;
+  grid-template-columns: 90px 1fr 40px;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+}
+.risk-bar-track {
+  background: var(--parchment-2);
+  height: 10px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.risk-bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.4s ease;
+}
+.risk-bar.safe .risk-bar-fill {
+  background: linear-gradient(90deg, var(--leaf-glow), var(--leaf));
+}
+.risk-bar.warning .risk-bar-fill {
+  background: linear-gradient(90deg, var(--amber-soft), var(--amber));
+}
+.risk-bar.critical .risk-bar-fill {
+  background: linear-gradient(90deg, var(--rust-soft), var(--rust));
+}
+.risk-bar.expired .risk-bar-fill {
+  background: linear-gradient(90deg, #666, var(--ink));
+}
+.risk-bar-count {
+  font-family: var(--font-mono);
+  text-align: right;
+}
+
+.activity {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  max-height: 320px;
+  overflow: auto;
+}
+.activity li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed var(--line);
+  font-size: 0.9rem;
+}
+.activity li:last-child {
+  border-bottom: none;
+}
+.activity time {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+/* Inventory */
+.toolbar {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+.toolbar input,
+.toolbar select {
+  padding: 0.55rem 0.75rem;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  background: var(--cream);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+.toolbar input {
+  flex: 1 1 220px;
+}
+.inventory-table td:nth-child(3),
+.inventory-table td:nth-child(4),
+.inventory-table td:nth-child(5) {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+.row-actions {
+  display: flex;
+  gap: 0.35rem;
+  justify-content: flex-end;
+}
+.icon-btn {
+  border: 1px solid var(--line);
+  background: var(--parchment);
+  padding: 0.3rem 0.55rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: var(--ink);
+}
+.icon-btn:hover {
+  background: var(--ink);
+  color: var(--cream);
+}
+.icon-btn.danger:hover {
+  background: var(--rust);
+}
+.empty {
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Freshness meter */
+.freshness {
+  margin-top: 1rem;
+}
+.freshness-bar {
+  height: 12px;
+  background: var(--parchment-2);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+.freshness-bar span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--rust) 0%,
+    var(--amber) 40%,
+    var(--leaf-glow) 75%,
+    var(--leaf) 100%
+  );
+  border-radius: 8px;
+  transition: width 0.4s ease;
+}
+
+/* Add product layout */
+.add-wrap {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+@media (max-width: 800px) {
+  .add-wrap {
+    grid-template-columns: 1fr;
+  }
+}
+.card-form {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+.card-form .row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+.preview-panel {
+  background: var(--parchment-2);
+  border: 2px dashed var(--leaf);
+  border-radius: 14px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.preview-name {
+  font-family: var(--font-display);
+  margin: 0.4rem 0 0;
+  font-size: 1.6rem;
+}
+.preview-meta {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+/* Donation grid */
+.donation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+.donation-card {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+.donation-card button {
+  align-self: stretch;
+}
+.centers {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.6rem;
+}
+.centers li {
+  background: var(--parchment);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.9rem;
+}
+.centers strong {
+  font-family: var(--font-display);
+}
+.centers span {
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+}
+
+/* Risk badge (pill for inventory) */
+.risk-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px 3px 6px;
+  border-radius: 3px 10px 10px 3px;
+  clip-path: polygon(10px 0, 100% 0, 100% 100%, 10px 100%, 0 50%);
+  color: var(--cream);
+  background: var(--leaf);
+}
+.risk-badge.warning {
+  background: var(--amber);
+  color: #2b1a00;
+}
+.risk-badge.critical {
+  background: var(--rust);
+}
+.risk-badge.expired {
+  background: var(--ink);
+}
